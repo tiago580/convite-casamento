@@ -31,9 +31,13 @@
               "src/styles.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/pace-js/themes/blue/pace-theme-minimal.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/pace-js/pace.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -15,6 +15,7 @@ defineLocale('pt-br', ptBrLocale);
 
 import { AppComponent } from './app.component';
 import { EventoCadastroComponent } from './evento-cadastro/evento-cadastro.component';
+import { AppInterceptorModule } from 'src/app-interceptor/app-interceptor.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EventoCadastroComponent } from './evento-cadastro/evento-cadastro.compo
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    AppInterceptorModule
   ],
   providers: [],
   bootstrap: [AppComponent],
