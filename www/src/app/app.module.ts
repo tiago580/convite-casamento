@@ -13,6 +13,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 defineLocale('pt-br', ptBrLocale);
 
+
 import { AppComponent } from './app.component';
 import { EventoCadastroComponent } from './evento-cadastro/evento-cadastro.component';
 import { AppInterceptorModule } from 'src/app-interceptor/app-interceptor.module';

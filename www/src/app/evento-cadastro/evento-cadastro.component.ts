@@ -20,6 +20,7 @@ export class EventoCadastroComponent implements OnInit {
   dataMinima: Date;
   evento: Evento;
   convidados: Convidado[] = [];
+  convidadosFiltro: Convidado[] = [];
 
   formCadastroEvento = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.maxLength(255)]),
@@ -45,6 +46,8 @@ export class EventoCadastroComponent implements OnInit {
       this.formCadastroEvento.controls.nome.setValue(this.evento.nome);
       this.formCadastroEvento.controls.data.setValue(moment(this.evento.data, 'YYYY-MM-DD HH:mm').toDate());
       this.convidados = this.evento.convidados || [];
+      this.atualizarFiltro();
+
       this.convidados.map(convidado => {
         convidado.statusNome = Status[convidado.status];
       })
@@ -81,10 +84,10 @@ export class EventoCadastroComponent implements OnInit {
       this.toastr.error('Informe o nome do convidado corretamente.');
     } else {
       this.convidados.push(new Convidado(this.formAddConvidado.value.nome, Status.PENDENTE));
+      this.atualizarFiltro();
       this.formAddConvidado.reset();
     }
 
-    console.log(this.convidados);
   }
   validarInformacoes() {
     if (this.formCadastroEvento.controls.nome.invalid) {
@@ -111,11 +114,33 @@ export class EventoCadastroComponent implements OnInit {
   }
   excluir(index: number) {
     this.convidados.splice(index, 1);
+    this.atualizarFiltro();
+
+  }
+
+  filtrarConvidados() {
+    const nome = this.formAddConvidado.value.nome;
+    if (nome != null && typeof(nome) !== 'undefined') {
+      
+      if (this.evento.id > 0) {
+        this.eventoService.filtrarConvidado(this.evento.id, nome).subscribe(convidados => {
+          this.convidadosFiltro = convidados;
+        })
+      } else {
+        this.convidadosFiltro = this.convidados.filter(convidado => (nome.trim() === '') || (convidado.nome.toLowerCase().indexOf(nome.toLowerCase()) > -1));
+      }
+    }
   }
 
   private alterarStatusConvidado(index: number, status: Status) {
     this.convidados[index].status = status;
     this.convidados[index].statusNome = Status[status];
+    this.atualizarFiltro();
   }
+
+  private atualizarFiltro(){
+    this.convidadosFiltro = this.convidados.map(obj => (obj));
+  }
+
 
 }

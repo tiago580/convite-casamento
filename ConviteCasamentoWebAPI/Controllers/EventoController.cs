@@ -105,6 +105,19 @@ namespace ConviteCasamentoWebAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        [HttpGet("{id}/convidados")]
+        public IActionResult FiltrarConvidados(int id, [FromQuery] string nome = null)
+        {
+            try
+            {
+                var lista = eventoNegocio.FiltrarConvidados(id, nome);
+                return Ok(lista);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
         
     }

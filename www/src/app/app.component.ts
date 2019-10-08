@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit{
       this.localeService.use('pt-br');
     }
   ngOnInit() {
+
     this.filtrar();
   }
 

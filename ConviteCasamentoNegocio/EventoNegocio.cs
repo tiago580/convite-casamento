@@ -13,8 +13,10 @@ namespace ConviteCasamentoNegocio
 {
     public class EventoNegocio : NegocioBase<EventoDTO, Evento>, IEventoNegocio
     {
-        public EventoNegocio(IEventoRepositorio repositorio, IMapper mapper) : base(repositorio, mapper)
+        private IConvidadoRepositorio convidadoRepositorio;
+        public EventoNegocio(IEventoRepositorio repositorio, IConvidadoRepositorio convidadoRepositorio, IMapper mapper) : base(repositorio, mapper)
         {
+            this.convidadoRepositorio = convidadoRepositorio;
         }
 
         public IEnumerable<EventoDTO> Consultar(string nome = null, DateTime? dataInicial = null, DateTime? dataFinal = null)
@@ -30,6 +32,20 @@ namespace ConviteCasamentoNegocio
                 return mapper.Map<IEnumerable<EventoDTO>>(_list);
             }
             return Enumerable.Empty<EventoDTO>();
+        }
+
+        public IEnumerable<ConvidadoDTO> FiltrarConvidados(int idEvento, string nomeConvidado = null)
+        {
+            Expression<Func<Convidado, bool>> _where = obj =>
+                obj.EventoId == idEvento &&
+               (string.IsNullOrEmpty(nomeConvidado) || obj.Nome.Contains(nomeConvidado));
+
+            var _list = convidadoRepositorio.Consultar(_where);
+            if (_list != null)
+            {
+                return mapper.Map<IEnumerable<ConvidadoDTO>>(_list);
+            }
+            return Enumerable.Empty<ConvidadoDTO>();
         }
 
         protected override Evento ValidarObjeto(EventoDTO obj)

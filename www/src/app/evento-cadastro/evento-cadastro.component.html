@@ -23,7 +23,8 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <button type="submit" class="btn btn-success">Adicionar</button>
+            <button type="submit" class="btn btn-success mr-2">Adicionar</button>
+            <button type="button" class="btn btn-secondary" (click)="filtrarConvidados()">Filtrar</button>
         </div>
         <div class="container">
             <table class="table">
@@ -36,7 +37,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let convidado of convidados; let i = index">
+                  <tr *ngFor="let convidado of convidadosFiltro; let i = index">
                     <th scope="row">{{i + 1}}</th>
                     <td>{{convidado.nome}}</td>
                     <td>{{convidado.statusNome}}</td>

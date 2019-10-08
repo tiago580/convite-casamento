@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { CONFIG } from 'src/config';
 import { Observable } from 'rxjs';
 import { Evento } from './evento';
+import { Convidado } from './convidado';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,14 @@ export class EventoService {
   obter(id: number): Observable<Evento> {
     const url = `${CONFIG.url}/evento/${id}`;
     return this.httpClient.get<Evento>(url);
+  }
+  filtrarConvidado(id: number, nomeConvidado?: string): Observable<Convidado[]> {
+    const url = `${CONFIG.url}/evento/${id}/convidados`;
+    let params = new HttpParams();
+    if (nomeConvidado) {
+      params = params.append('nome', nomeConvidado.trim());
+    }
+    return this.httpClient.get<Convidado[]>(url, {params});
   }
   excluir(id: number): Observable<Evento> {
     const url = `${CONFIG.url}/evento/${id}`;
