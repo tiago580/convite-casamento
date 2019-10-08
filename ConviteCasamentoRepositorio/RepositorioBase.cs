@@ -16,7 +16,7 @@ namespace ConviteCasamentoRepositorio
         {
             _context = context;
         }
-        public void Alterar(T obj)
+        public virtual void Alterar(T obj)
         {
             _context.Update(obj);
             _context.SaveChanges();
@@ -33,7 +33,7 @@ namespace ConviteCasamentoRepositorio
             _context.SaveChanges();
         }
 
-        public T Obter(int id, bool noTrancking = true)
+        public virtual T Obter(int id, bool noTrancking = true)
         {
             bool _where(T obj) => obj.Id == id;
             if (noTrancking)

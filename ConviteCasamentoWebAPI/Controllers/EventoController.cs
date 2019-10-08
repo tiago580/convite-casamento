@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ConviteCasamentoDTO;
 using ConviteCasamentoNegocio;
@@ -18,6 +19,58 @@ namespace ConviteCasamentoWebAPI.Controllers
         public EventoController(IEventoNegocio eventoNegocio)
         {
             this.eventoNegocio = eventoNegocio;
+        }
+        [HttpPost]
+        public IActionResult Inserir([FromBody] EventoDTO evento)
+        {
+            try
+            {
+                eventoNegocio.Inserir(evento);
+                return StatusCode((int)HttpStatusCode.Created);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        [HttpPut("{id}")]
+        public IActionResult Alterar(int id,[FromBody] EventoDTO evento)
+        {
+            try
+            {
+                eventoNegocio.Alterar(id, evento);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Remover(int id)
+        {
+            try
+            {
+                eventoNegocio.Remover(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        [HttpGet("{id}")]
+        public IActionResult Obter(int id)
+        {
+            try
+            {
+                var obj = eventoNegocio.Obter(id);
+                return Ok(obj);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet]

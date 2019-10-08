@@ -7,6 +7,6 @@ namespace ConviteCasamentoNegocio
 {
     public interface IEventoNegocio: INegocioBase<EventoDTO>
     {
-        IEnumerable<EventoDTO> Consultar(String nome = null, DateTime? dataInicial = null, DateTime? dataFinal = null);
+        IEnumerable<EventoDTO> Consultar(string nome = null, DateTime? dataInicial = null, DateTime? dataFinal = null);
     }
 }

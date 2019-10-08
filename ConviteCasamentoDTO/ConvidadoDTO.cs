@@ -10,5 +10,6 @@ namespace ConviteCasamentoDTO
         public string Nome { get; set; }
         public StatusDTO Status { get; set; }
 
+
     }
 }

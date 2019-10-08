@@ -6,5 +6,6 @@ namespace ConviteCasamentoDominio.Exceptions
 {
     public class NomeEventoNaoInformadoException: Exception
     {
+        public override string Message => "Nome do evento não informado."; 
     }
 }

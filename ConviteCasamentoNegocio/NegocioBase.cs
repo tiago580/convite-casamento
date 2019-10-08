@@ -20,14 +20,14 @@ namespace ConviteCasamentoNegocio
             this.repositorio = repositorio;
             this.mapper = mapper;
         }
-        public void Alterar(T obj)
+        public virtual void Alterar(int id, T obj)
         {
-            var _obj = ValidarObjeto(obj);
-            if (!ExisteRegistro(_obj.Id))
+            if (!ExisteRegistro(id))
             {
                 throw new RegistroNaoEncontradoException();
             }
-
+            var _obj = ValidarObjeto(obj);
+            _obj.Id = id;
             repositorio.Alterar(_obj);
         }
 
@@ -63,7 +63,7 @@ namespace ConviteCasamentoNegocio
             repositorio.Remover(id);
         }
 
-        private D ValidarObjeto(T obj)
+        protected virtual D ValidarObjeto(T obj)
         {
             if (obj == null)
             {

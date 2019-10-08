@@ -4,7 +4,16 @@ using System.Text;
 
 namespace ConviteCasamentoNegocio.Exceptions
 {
-    public class ParametroNuloException: ArgumentNullException
+    public class ParametroNuloException: Exception
     {
+        public ParametroNuloException(): base()
+        {
+
+        }
+        public ParametroNuloException(string msg): base(msg)
+        {
+
+        }
+        public override string Message => $"Parâmetro obrigatório não informado. {base.Message}";
     }
 }

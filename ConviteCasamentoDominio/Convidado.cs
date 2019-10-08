@@ -27,7 +27,7 @@ namespace ConviteCasamentoDominio
 
         private void ValidarNome()
         {
-            if (string.IsNullOrEmpty(Nome))
+            if (string.IsNullOrEmpty(Nome) || string.IsNullOrWhiteSpace(Nome))
             {
                 throw new NomeConvidadoNaoInformadoException();
             }

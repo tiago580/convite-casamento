@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject>ConviteCasamentoWebAPI.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
     <ProjectReference Include="..\ConviteCasamentoDTO\ConviteCasamentoDTO.csproj" />
     <ProjectReference Include="..\ConviteCasamentoNegocio\ConviteCasamentoNegocio.csproj" />
     <ProjectReference Include="..\ConviteCasamentoRepositorio\ConviteCasamentoRepositorio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

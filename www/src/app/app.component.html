@@ -3,42 +3,80 @@
   <span class="navbar-brand mb-0 h1">{{title}}</span>
 </nav>
 <div class="container-fluid pt-2">
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          <div class="d-flex align-items-center">
-            <h5 class="mr-auto p-3">Evento 1</h5>
-            <button type="button" class="btn btn-primary">Convidados</button>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="frmFiltro" (ngSubmit)="filtrar()" novalidate>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input autocomplete="off" type="text" class="form-control" id="nome" formControlName="nome">
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="dataInicial">Data Inicial</label>
+              <input autocomplete="off" type="text" class="form-control" id="dataInicial" bsDatepicker
+                [bsConfig]="{ isAnimated: true,dateInputFormat: 'DD/MM/YYYY HH:mm' }" 
+                formControlName="dataInicial">
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="dataFinal">Data Final</label>
+              <input autocomplete="off" type="text" class="form-control" id="dataFinal" bsDatepicker
+                [bsConfig]="{ isAnimated: true,dateInputFormat: 'DD/MM/YYYY HH:mm' }"
+                formControlName="dataFinal">
+            </div>
+
           </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title"></h5>
-          <h6 class="card-subtitle mb-2 text-muted">13/10/2019 20:30</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-secondary mr-1">
-            Pendentes <span class="badge badge-light">4</span>
-          </button>
-          <button type="button" class="btn btn-success  mr-1">
-            Confirmados <span class="badge badge-light">4</span>
-          </button>
-          <button type="button" class="btn btn-danger">
-            Não estarão presentes <span class="badge badge-light">4</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Evento 2</h5>
-          <h6 class="card-subtitle mb-2 text-muted">23/10/2019 13:30</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-secondary">Filtrar</button>
+
+      </form>
     </div>
   </div>
-  
 </div>
+<div class="container-fluid pt-2">
+  <div class="card">
+    <div class="card-body">
+      <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Novo</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid pt-2">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Evento</th>
+        <th scope="col">Data</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{evento.nome}}</td>
+        <td>{{evento.data | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>
+          <button type="button" class="btn btn-link" (click)="editar(evento.id)">Editar</button>
+          <button type="button" class="btn btn-link" (click)="excluir(evento.id, templateExcluir)">Excluir</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<ng-template #templateExcluir>
+  <div class="modal-body text-center">
+    <p>Deseja remover esse registro?</p>
+    <button type="button" class="btn btn-danger mr-2" (click)="confirmarExclusao()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">Não</button>
+  </div>
+</ng-template>

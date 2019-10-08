@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ConviteCasamentoDominio;
 using ConviteCasamentoDTO;
+using ConviteCasamentoNegocio.Exceptions;
 using ConviteCasamentoRepositorio;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,10 @@ namespace ConviteCasamentoNegocio
 
         public IEnumerable<EventoDTO> Consultar(string nome = null, DateTime? dataInicial = null, DateTime? dataFinal = null)
         {
-            Expression<Func<Evento, bool>>  _where = obj => (nome == null || obj.Nome.Contains(nome)) &&
-                (dataInicial == null || obj.Data.CompareTo(dataInicial) >= 0) &&
-                (dataFinal == null || obj.Data.CompareTo(dataFinal) <= 0);
+            Expression<Func<Evento, bool>> _where = obj =>
+               (string.IsNullOrEmpty(nome) || obj.Nome.Contains(nome)) &&
+               (dataInicial == null || obj.Data >= dataInicial) &&
+               (dataFinal == null || obj.Data <= dataFinal);
 
             var _list = repositorio.Consultar(_where);
             if (_list != null)
@@ -28,6 +30,29 @@ namespace ConviteCasamentoNegocio
                 return mapper.Map<IEnumerable<EventoDTO>>(_list);
             }
             return Enumerable.Empty<EventoDTO>();
+        }
+
+        protected override Evento ValidarObjeto(EventoDTO obj)
+        {
+            var evento = base.ValidarObjeto(obj);
+            validarConvidados(evento.Convidados);
+            return evento;
+        }
+
+        private void validarConvidados(IEnumerable<Convidado> convidados)
+        {
+            if (convidados != null)
+            {
+                foreach (var convidado in convidados)
+                {
+                    if (convidado == null)
+                    {
+                        throw new ParametroNuloException("Convidado inválido.");
+                    }
+
+                    convidado.Validar();
+                }
+            }
         }
 
     }

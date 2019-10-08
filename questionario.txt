@@ -1,0 +1,91 @@
+1 - Layered Architecture (Clean Architecture)
+	a) A Clean Architecture é focada na regra de negócio,  não deve depender biblioteca externa, banco de dados, e é facilmente testável sem a necessidade da criação de uma interface de usuário.
+		A  dependência entre as camadas vão da camada mais externa para a mais interna e onde a camada mais interna não tem conhecimento do funcionamento da camada superior.
+	
+	b) 
+		Entities - Camada das entidades que contém as regras de negócio.
+		Use Cases - Encapsula e implementa os casos de uso da aplicação, manipulando o fluxo de dados entre as entidades.
+		Interface Adapters - Camada que converte os dados para o formato adequado para a Use Cases e Entities, seja banco de dados, uma API REST ou UI.
+
+2 - C#
+    a) É uma inversão de controle, onde um objeto A que necessita de uma instância de B a obtém de forma transparente sem a necessidade de chamar o construtor de B.
+    b) É uma expressão que pode ser utilizada para criar delegates  e que também podem ser passadas como parâmetro em outros métodos.
+    c)
+        try - Dentro desse bloco são informadas expressões que podem lançar uma exceção
+        catch - Caso dentro do try ocorra uma exceção ela vai ser capturada dentro desse bloco
+        finally - Independentemente da execução dos blocos try e catch, o bloco finally será sempre chamado ao fim da execução de um e/ou outro.
+    d) 
+        Collections -
+            System.Collections.Generic - Utilizada quando cada item da coleção tem um tipo de dado definido.
+            System.Collections.Concurrent - Utilizada para operações thread-safe dos itens da coleção de várias threads.
+            System.Collections - Não armazena itens fortemente tipados, mas como objetos do tipo Object.
+            System.Collections.Specialized - Disponibiliza classes fortemente tipadas e mais especializadas, como dicionários híbridos e listas linkadas.
+    e) 
+        Busca sequencial ou linear - A forma mais simples de procurar por elementos em uma lista desordenada, o objetivo é procurar o valor através de comparações em sequencia do início ou fim da lista.
+        Busca binária - Forma mais complexa para encontrar um valor dentro de uma lista ordenada, sai dividindo pela metade os blocos da lista onde o valor requerido está contido.
+3 - SOLID
+    3.1 - Single Responsibility Principle - Uma classe/método deve ter somente uma responsabilidade dentro do sistema. Partindo desse princípio uma View não pode ter a responsabilidade de carregar o driver do banco de dados e executar consultas SQL.
+    3.2 - Open-Closed Principle - Objetos devem estar abertos para extensão e fechados para modificação. Incentivando assim a utilização de Interfaces para que cada Classe implemente de acordo com seus requisitos.
+    3.3 - Liskov Substitution Principle -  Uma classe derivada deve ser substituível por sua classe base. Dessa forma podemos utilizar o polimorfismo com segurança, fazendo chamada aos comportamentos da classe base sem que haja preocupação com resultados inesperados.
+    3.4 - Interface Segregation Principle - Uma classe não deve ser forçada a implementar interfaces e métodos que não irá utilizar. É melhor criar interfaces mais específicas do que criar uma única interface genérica, obrigando a classe a implementar métodos que não serão utilizados.
+    3.5 - Dependency Inversion Principle - Programar voltado à abstrações e não à implementações. Como abstrações mudam menos a manutenção e evolução torna-se mais fácil.
+
+4 - TDD
+	a) O TDD parte da premissa que se deve testar antes de implementar, fazendo assim que se diminua a quantidade de códigos que estariam fora de escopo e capturando possíveis bugs antes da implementação.
+		Possui um ciclo bem definido: faz-se o teste falhar, implementa-se o algoritmo suficiente para que o teste passe, refatora-se o código testado sem falha.
+	b) Mock é uma maneira de simular tarefa de agentes externos às classes de teste, e servem de apoio no momento de testes. Como, por exemplo, testar a consulta de registros que viriam de uma base de dados, com o mock nosso teste não necessitaria de uma conexão real com a base de dados.
+	
+5 - Angular 6
+	a) O angular é uma plataforma para aplicações web, mobile e desktop. Utilzando o typescript como linguagem de programação e recursos popularmente conhecidos como html5 e css.
+		Possibilita rodar testes automatizados e compilar para uma versão específica do ECMAScript, gerar builds para debug e produção e implementação utilizando o watcher onde é possível visualizar no navegador a evolução das modificações sem a necessidade de um comando para rodar o debug.
+	b) O angular utiliza a classe Observer da biblioteca do RxJS, com esse padrão é possível observar as mudanças em um observer apenas assinando-o (subscribe), onde qualquer mudança que ocorra, o observer notifica todos que estiverem 'inscritos' nele.
+	c) É uma biblioteca para programação reativa que utiliza observers para facilitar a implementação de código com retorno assíncrono. Com ela é possível criar funções assíncronas com poucas linhas de código.	
+	
+6 - Web API
+	a) 
+		Um Web API é um serviço HTTP que possibilita a integração com outros sistemas (web, mobile, desktop...).
+	b) 
+		O WCF suporta mais protocolos de transporte que o Web API que só suporta o HTTP, porém o WCF requer mais configurações que o Web API.
+		Há também a diferença que o Web API tem seu foco voltado para dispositivos com largura de banda limitada como dispositivos mobile utilizando o padrão REST e possibilitando respostas mais enxutas com o formato JSON.
+	c) 
+		É um framework que ajuda a documentar API's a partir de anotações e comentários de código, podendo exibir a documentação em uma página web com o Swagger UI.
+
+7 - ASP.NET MVC Core
+    a) Qual a diferença entre o .NET Framework e .NET Core ?
+        O .NET Core possibilita a criação de sistemas multiplataforma (Windows, Linux e Mac) e é também voltado para criação de microsserviços e não é um componente windows, suas atualizações são realizadas como pacotes Nuget possibilitando assim a execução de várias aplicações com versões diferentes do .NET Core na mesma máquina.
+        O .NET framework é voltado para ambientes windows, criação de aplicações desktop utilizando o Windows Forms e WPF e Web com ASP.NET
+    b) Nos explique o funcionamento de uma aplicação ASP.NET MVC
+       Utilizando o padrão MVC é possível criar as views utilizando tecnologias como o Razor que interagem com as Actions nos Controllers que por sua vez possibilitam manipular o Model.
+
+8 - ASP.NET Boilerplate
+    a) Nos explique o que é uma aplicação ASP.NET Boilerplate
+       É uma aplicação criada a partir de templates focados nas melhores práticas focadas no desenvolvimento SOLID.
+
+9 - SignalR
+	a) Nos explique o que é e o funcionamento da sofware libray SignalR
+		SignalR é uma biblioteca voltada para facilitar a comunicação em tempo real de forma assíncrona de uma aplicação. Funciona combinando uma biblioteca que roda do lado servidor(ASP.NET) e outra no cliente (javaScript) para manter a comunicação aberta.
+
+10 - Entity Framework Core
+    a) Nos explique a definição e funcionamento do Entity Framework
+        É um ORM que permite trabalhar com as tabelas e relacionamentos do banco de dados através de objetos .NET.
+    b) Qual a diferença entre ADO.NET e EF ?
+        No ADO.NET é necessário escrever as consultas e passar o resultado de um ResultSet para objetos de classe manualmente. Já no EF o código SQL fica trasparente, bastando, quando necessário, informar qual o nome da tabela/campo a entidade/propriedade representa.
+    c) Nos explique o que é DbContext e DbSet
+		O DbContext é responsável por manipular os objetos de entidade através do DbSet. Ele obtém as informações do banco de dados e preenche os objetos e persiste as alterações na base.
+		O DbSet representa a coleção das entidades que podem ser inseridas, atualizadas, removidas e consultadas na base de dados .
+
+11 - GIT
+	a) Nos explique a definição de GIT
+		O GIT é um sistema de controle de versão que possibilita ter em cada máquina cliente uma cópia do repositório remoto, dessa forma é possível realizar commits na base local que podem ser posteriormente enviados para uma base remota.
+	b) Nos explique o funcionamento de Merge|Branch|Pull|Push
+		Merge - Faz a junção de alterações realizadas em um branch na linha principal (master).
+		Branch - É um ramo do repositório. Há a possibilidade, também,  de criar branches a partir do principal, uma cópia utilizada para desenvolver funcionalidades de forma isolada.
+		Pull - Obtém a última versão do branch em questão a partir de um servidor remoto.
+		Push - Envia as alterações comitadas na base local para a base remota.
+	c) Como funciona um Pull Request ?
+		É uma solicitação para realizar o merge de um branch para o branch principal.
+
+
+12 - RabbitMQ
+    a) Defina qual a finalidade do RabbitMQ
+		Realizar o controle de mensageria entre diferentes aplicações utilizando o protocolo AMQP.

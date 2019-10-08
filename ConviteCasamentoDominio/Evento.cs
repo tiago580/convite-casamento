@@ -15,8 +15,7 @@ namespace ConviteCasamentoDominio
         [Column("DATA")]
         public DateTime Data { get; set; }
 
-        public ICollection<Convidado> Convidados
-        { get; set; }
+        public ICollection<Convidado> Convidados { get; set; }
 
         public override void Validar()
         {
@@ -28,7 +27,7 @@ namespace ConviteCasamentoDominio
 
         private void ValidarNome()
         {
-            if (string.IsNullOrEmpty(Nome))
+            if (string.IsNullOrEmpty(Nome) || string.IsNullOrWhiteSpace(Nome))
             {
                 throw new NomeEventoNaoInformadoException();
             }

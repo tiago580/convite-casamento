@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="frmCadastro" [formGroup]="formCadastroEvento" (ngSubmit)="salvar($event)" novalidate>
+        <div class="form-group">
+            <label for="nomeEvento">Nome</label>
+            <input autocomplete="off" type="text" class="form-control" id="nomeEvento" formControlName="nome">
+        </div>
+        <div class="form-group">
+            <label for="dataEvento">Data</label>
+            <input autocomplete="off" type="text" class="form-control" id="dataEvento" bsDatepicker [bsConfig]="{ isAnimated: true,dateInputFormat: 'DD/MM/YYYY HH:mm' }" [minDate]="dataMinima" formControlName="data">
+        </div>
+    </form>  
+    <hr class="divider">
+    <form class="row" [formGroup]="formAddConvidado" (ngSubmit)="adicionarConvidado()">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <input autocomplete="off" type="text" class="form-control" placeholder="Nome do Convidado" formControlName="nome">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-success">Adicionar</button>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-center">Opções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let convidado of convidados; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{convidado.nome}}</td>
+                    <td>{{convidado.statusNome}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-link" (click)="confirmar(i)">Confirmou</button>
+                        <button type="button" class="btn btn-link" (click)="negar(i)">Não vai</button>
+                        <button type="button" class="btn btn-link" (click)="excluir(i)">Excluir</button>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" form="frmCadastro" class="btn btn-primary">Salvar</button>
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Fechar</button>
+  </div>
+
