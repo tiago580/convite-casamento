@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
     "bootstrap": "^4.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-bootstrap": "^5.1.2",
     "ngx-toastr": "^11.1.0",
     "pace-js": "^1.0.2",
